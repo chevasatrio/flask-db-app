@@ -17,7 +17,7 @@ pipeline {
                 bat '''
             echo Memeriksa Docker...
             "C:\\Users\\cheva\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" --version
-            "C:\\Users\\cheva\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" version
+            "C:\\Users\\cheva\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" compose version
         '''
             }
         }
