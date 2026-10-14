@@ -5,6 +5,7 @@ pipeline {
         IMAGE_NAME = 'chevasatrio/flask-db-app'
         REGISTRY_CREDENTIALS = 'dockerhub-credentials'
         PATH = "C:\\Users\\cheva\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin;${env.PATH}"
+        COMPOSE_EXE = 'C:\\Users\\cheva\\AppData\\Local\\Programs\\DockerDesktop\\resources\\cli-plugins\\docker-compose.exe'
     }
 
     stages {
@@ -16,8 +17,8 @@ pipeline {
             steps {
                 bat '''
             echo Memeriksa Docker...
-            "C:\\Users\\cheva\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" --version
-            "C:\\Users\\cheva\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" compose version
+            docker --version
+            "%COMPOSE_EXE%" version
         '''
             }
         }
@@ -41,13 +42,16 @@ pipeline {
         stage('Check Docker Compose') {
             steps {
                 bat 'docker --version'
-                bat 'docker compose version'
+                bat '"%COMPOSE_EXE%" version'
             }
         }
 
         stage('Deploy dengan Database') {
             steps {
-                bat 'docker compose --project-name flaskdb up -d --build'
+                bat '''
+            "%COMPOSE_EXE%" --project-name flaskdb up ^
+                -d --build
+        '''
             }
         }
 
