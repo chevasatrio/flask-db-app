@@ -4,6 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = 'chevasatrio/flask-db-app'
         REGISTRY_CREDENTIALS = 'dockerhub-credentials'
+        PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
     }
 
     stages {
