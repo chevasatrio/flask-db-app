@@ -37,11 +37,20 @@ pipeline {
                         }
             }
         }
-        stage('Deploy dengan Database') {
+
+        stage('Check Docker Compose') {
             steps {
-                bat 'docker compose -p flaskdb up -d --build'
+                bat 'docker --version'
+                bat 'docker compose version'
             }
         }
+
+        stage('Deploy dengan Database') {
+            steps {
+                bat 'docker compose --project-name flaskdb up -d --build'
+            }
+        }
+
         stage('Verifikasi') {
             steps {
                 sleep time: 15, unit: 'SECONDS'
